@@ -188,6 +188,12 @@ func main() {
 - [ ] Array
     - [ ] Data Type
     - [ ] Nil
+    - [ ] Element
+    - [ ] Length
+- [ ] Slice
+    - [ ] Data Type
+    - [ ] Nil
+    - [ ] Element
     - [ ] Min Length
     - [ ] Max Length
 - [ ] Map
@@ -200,4 +206,8 @@ func main() {
     - [ ] Email
     - [ ] ISO Date
     - [ ] Phone Number
-- [ ] Custom Error Message
+- [ ] Custom
+    - [ ] Error Message
+    - [ ] Rule
+    - [ ] Schema
+- [ ] Unit Tests

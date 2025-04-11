@@ -15,6 +15,7 @@ type RuleName uint
 
 const (
 	RuleNotEmpty RuleName = iota
+	RuleLength
 	RuleMinLength
 	RuleMaxLength
 	RuleMinValue
@@ -32,10 +33,12 @@ func (ruleError RuleError) Error() string {
 	switch ruleError.Name {
 	case RuleNotEmpty:
 		return "value must not be empty"
+	case RuleLength:
+		return fmt.Sprintf("value must be exactly %d in length", ruleError.Params[0])
 	case RuleMinLength:
-		return fmt.Sprintf("value must be at least %d characters long", ruleError.Params[0])
+		return fmt.Sprintf("value must be at least %d in length", ruleError.Params[0])
 	case RuleMaxLength:
-		return fmt.Sprintf("value must be at most %d characters long", ruleError.Params[0])
+		return fmt.Sprintf("value must be at most %d in length", ruleError.Params[0])
 	case RuleMinValue:
 		return fmt.Sprintf("value must be at least %d", ruleError.Params[0])
 	case RuleMaxValue:
@@ -55,4 +58,14 @@ type FieldError struct {
 
 func (fieldError FieldError) Error() string {
 	return fmt.Sprintf("field %s: %s", fieldError.Name, fieldError.Err)
+}
+
+type ElementError struct {
+	Index int
+	Value any
+	Err   error
+}
+
+func (elementError ElementError) Error() string {
+	return fmt.Sprintf("index %d: %s", elementError.Index, elementError.Err)
 }
