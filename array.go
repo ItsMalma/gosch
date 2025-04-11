@@ -9,7 +9,7 @@ type ArraySchema struct {
 }
 
 // Array validate data type of the input.
-// If the input is not a struct, it will return an error.
+// If the input is not an array, it will return an error.
 func Array() ArraySchema {
 	return ArraySchema{
 		element: nil,

@@ -43,7 +43,7 @@ func main() {
 }
 ```
 
-Creating a struct schema
+Creating a complex schema (struct, array)
 
 ```go
 package main
@@ -60,9 +60,27 @@ func main() {
         Field("Name", gosch.String()).
         Field("Age", gosch.Int())
     
+    personsSchema := gosch.Array().
+        Element(personSchema).
+        Length(3)
+    
     println(personSchema.Validate(Person{
         Name: "Malma",
-        Age: 19
+        Age: 19,
+    }))
+    println(personsSchema.Validate([3]Person{
+        {
+            Name: "Malma",
+            Age: 19,
+        },
+        {
+            Name: "John Doe",
+            Age: 25,
+        },
+        {
+            Name: "Bob",
+            Age: 22,
+        },
     }))
 }
 ```
@@ -163,6 +181,9 @@ func main() {
     - [ ] Includes
     - [ ] Excludes
     - [ ] Pattern
+        - [ ] Email
+        - [ ] ISO Date
+        - [ ] Phone Number
 - [ ] Int
     - [x] Data Type
     - [x] Nil
@@ -185,11 +206,11 @@ func main() {
     - [x] Data Type
     - [x] Nil
     - [x] Field
-- [ ] Array
-    - [ ] Data Type
-    - [ ] Nil
-    - [ ] Element
-    - [ ] Length
+- [x] Array
+    - [x] Data Type
+    - [x] Nil
+    - [x] Element
+    - [x] Length
 - [ ] Slice
     - [ ] Data Type
     - [ ] Nil
@@ -202,10 +223,6 @@ func main() {
     - [ ] Key
     - [ ] Min Length
     - [ ] Max Length
-- [ ] Pattern
-    - [ ] Email
-    - [ ] ISO Date
-    - [ ] Phone Number
 - [ ] Custom
     - [ ] Error Message
     - [ ] Rule
