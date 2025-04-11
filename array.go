@@ -12,6 +12,7 @@ type ArraySchema struct {
 // If the input is not an array, it will return an error.
 func Array() ArraySchema {
 	return ArraySchema{
+		nilable: false,
 		element: nil,
 		length:  0,
 	}

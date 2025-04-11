@@ -211,12 +211,12 @@ func main() {
     - [x] Nil
     - [x] Element
     - [x] Length
-- [ ] Slice
-    - [ ] Data Type
-    - [ ] Nil
-    - [ ] Element
-    - [ ] Min Length
-    - [ ] Max Length
+- [x] Slice
+    - [x] Data Type
+    - [x] Nil
+    - [x] Element
+    - [x] Min Length
+    - [x] Max Length
 - [ ] Map
     - [ ] Data Type
     - [ ] Nil
