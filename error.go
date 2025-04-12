@@ -61,11 +61,20 @@ func (fieldError FieldError) Error() string {
 }
 
 type ElementError struct {
-	Index int
+	Index any
 	Value any
 	Err   error
 }
 
 func (elementError ElementError) Error() string {
-	return fmt.Sprintf("index %d: %s", elementError.Index, elementError.Err)
+	return fmt.Sprintf("index %v: %v", elementError.Index, elementError.Err)
+}
+
+type KeyError struct {
+	Key any
+	Err error
+}
+
+func (keyError KeyError) Error() string {
+	return fmt.Sprintf("key %v: %v", keyError.Key, keyError.Err)
 }
