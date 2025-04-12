@@ -12,35 +12,33 @@ type MapSchema struct {
 }
 
 // Map validate data type of the input.
-// If the input is not a map, it will return an error.
-func Map() MapSchema {
+// If the input is not a map key to element, it will return an error.
+func Map(key, element Schema) MapSchema {
 	return MapSchema{
 		nilable: false,
-		key:     nil,
-		element: nil,
+		key:     key,
+		element: element,
 		rules:   []MapRule{},
 	}
+}
+
+// Key validate the key of a map.
+// If the input key is not match the key schema, it will return an error.
+func (mapSchema MapSchema) Key(keySchema Schema) MapSchema {
+	mapSchema.key = keySchema
+	return mapSchema
+}
+
+// Element validate the element of a map.
+// If the input element is not match the element schema, it will return an error.
+func (mapSchema MapSchema) Element(elementSchema Schema) MapSchema {
+	mapSchema.element = elementSchema
+	return mapSchema
 }
 
 // Nil will pass nil input.
 func (mapSchema MapSchema) Nil() MapSchema {
 	mapSchema.nilable = true
-	return mapSchema
-}
-
-// Key validate the key of a map.
-// If the key is not match the schema, it will return an error.
-func (mapSchema MapSchema) Key(schema Schema) MapSchema {
-	mapSchema.key = schema
-
-	return mapSchema
-}
-
-// Element validate the element of a map.
-// If the element is not match the schema, it will return an error.
-func (mapSchema MapSchema) Element(schema Schema) MapSchema {
-	mapSchema.element = schema
-
 	return mapSchema
 }
 

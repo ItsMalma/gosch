@@ -11,26 +11,25 @@ type SliceSchema struct {
 }
 
 // Slice validate data type of the input.
-// If the input is not a slice, it will return an error.
-func Slice() SliceSchema {
+// If the input is not a slice of element, it will return an error.
+func Slice(element Schema) SliceSchema {
 	return SliceSchema{
 		nilable: false,
-		element: nil,
+		element: element,
 		rules:   []SliceRule{},
 	}
+}
+
+// Element validate the element of the slice.
+// If the input element is not match the element schema, it will return an error.
+func (sliceSchema SliceSchema) Element(element Schema) SliceSchema {
+	sliceSchema.element = element
+	return sliceSchema
 }
 
 // Nil will pass nil input.
 func (sliceSchema SliceSchema) Nil() SliceSchema {
 	sliceSchema.nilable = true
-	return sliceSchema
-}
-
-// Element validate the element of a slice.
-// If the element is not match the schema, it will return an error.
-func (sliceSchema SliceSchema) Element(schema Schema) SliceSchema {
-	sliceSchema.element = schema
-
 	return sliceSchema
 }
 

@@ -4,43 +4,45 @@ import "reflect"
 
 type ArraySchema struct {
 	nilable bool
-	element Schema
 	length  int
+	element Schema
 }
 
 // Array validate data type of the input.
-// If the input is not an array, it will return an error.
-func Array() ArraySchema {
+// If the input is not an array of element, it will return an error.
+func Array(length int, element Schema) ArraySchema {
+	if length < 0 {
+		panic("length must be greater than or equal to 0")
+	}
+
 	return ArraySchema{
 		nilable: false,
-		element: nil,
-		length:  0,
+		length:  int(length),
+		element: element,
 	}
+}
+
+// Length validate the length of an array.
+// If the input length is not equal to the length, it will return an error.
+func (arraySchema ArraySchema) Length(length int) ArraySchema {
+	if length < 0 {
+		panic("length must be greater than or equal to 0")
+	}
+
+	arraySchema.length = length
+	return arraySchema
+}
+
+// Element validate the element of the array.
+// If the input element is not match the element schema, it will return an error.
+func (arraySchema ArraySchema) Element(element Schema) ArraySchema {
+	arraySchema.element = element
+	return arraySchema
 }
 
 // Nil will pass nil input.
 func (arraySchema ArraySchema) Nil() ArraySchema {
 	arraySchema.nilable = true
-	return arraySchema
-}
-
-// Element validate the element of an array.
-// If the element is not match the schema, it will return an error.
-func (arraySchema ArraySchema) Element(schema Schema) ArraySchema {
-	arraySchema.element = schema
-
-	return arraySchema
-}
-
-// Length validate the length of an array.
-// If the input is not match the length, it will return an error.
-func (arraySchema ArraySchema) Length(length int) ArraySchema {
-	if length < 0 {
-		panic("array length must be greater than or equal to 0")
-	}
-
-	arraySchema.length = length
-
 	return arraySchema
 }
 
