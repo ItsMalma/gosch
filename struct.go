@@ -11,7 +11,8 @@ type StructSchema struct {
 // If the input is not a struct, it will return an error.
 func Struct() StructSchema {
 	return StructSchema{
-		fields: map[string]Schema{},
+		nilable: false,
+		fields:  map[string]Schema{},
 	}
 }
 
